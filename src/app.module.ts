@@ -7,12 +7,12 @@ import { AuthModule } from './auth/auth.module';
 import { BusinessesModule } from './businesses/businesses.module';
 import { APP_PIPE } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
-
+import { constants } from './constants';
 
 
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://localhost:27017/DESKTOP-L613HQL'),UsersModule, AuthModule, BusinessesModule],
+  imports: [MongooseModule.forRoot(constants.mongoURI),UsersModule, AuthModule, BusinessesModule],
   controllers: [AppController],
   providers: [AppService,
     {

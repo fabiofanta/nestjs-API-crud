@@ -5,14 +5,14 @@ import { PassportModule } from '@nestjs/passport';
 import { LocalStrategy } from './local.strategy';
 import { JwtStrategy } from './jwt.strategy';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from './constants';
+import { constants } from '../constants';
 import { TokenBlacklistService } from '../token-blacklist/token-blacklist.service';
 
 
 
 @Module({
   imports: [UsersModule, PassportModule, JwtModule.register({
-    secret: jwtConstants.secret,
+    secret: constants.secret,
     signOptions: { expiresIn: '60s' },
   }),],
   providers: [AuthService, LocalStrategy, JwtStrategy, TokenBlacklistService],

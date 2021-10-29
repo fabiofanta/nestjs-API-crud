@@ -27,7 +27,7 @@ export class UsersService {
             const newUser = newBusinessDocument.toObject().users.pop();
             const { password, ...noPwUser} = newUser;
 
-            return new UserResponseDto(`userId ${noPwUser.id} saved successfully`,true,noPwUser);
+            return new UserResponseDto(`userId ${noPwUser._id} saved successfully`,true,noPwUser);
         } catch(error){
             return new UserResponseDto(`new user not saved successfully`,false);
         }
