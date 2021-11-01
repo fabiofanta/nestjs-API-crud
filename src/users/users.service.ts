@@ -38,7 +38,7 @@ export class UsersService {
 
     async findOne(email: string): Promise<User & {businessId?:string} | undefined> {
         
-        const businessDocumentByEmail = await this.businessModel.findOne({'users.email': email}).lean();
+        const businessDocumentByEmail = await this.businessModel.findOne({'users.email': email},{'users.$' : 1}).lean();
 
         const businessId = businessDocumentByEmail?._id;
         const foundUser: User & {businessId?:string} = businessDocumentByEmail?.users.pop();

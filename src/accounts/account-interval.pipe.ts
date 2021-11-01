@@ -6,7 +6,7 @@ import { AccountInterval } from './account-interval.enum';
 @Injectable()
 export class AccountIntervalPipe implements PipeTransform {
   transform(value: any, metadata: ArgumentMetadata) {
-    if (!isEnum(value,AccountInterval)) {
+    if (value && !isEnum(value,AccountInterval)) {
       throw new BadRequestException(`${value} is not a valid interval`);
     }
     return value;
