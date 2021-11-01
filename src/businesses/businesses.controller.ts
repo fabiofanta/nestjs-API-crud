@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, UseGuards, Body, Param , Delete, HttpException, HttpStatus} from '@nestjs/common';
+import { Controller, Get, Post, Put, UseGuards, Body, Param , Delete, HttpException, HttpStatus, Query} from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard } from '../roles/roles.guard';
 import { TokenBlacklistGuard } from '../token-blacklist/token-blacklist.guard';
@@ -6,19 +6,23 @@ import { BusinessesGuard } from '../businesses/businesses.guard';
 import { UsersDeleteGuard } from '../users/users-delete.guard';
 import { BusinessesService } from './businesses.service';
 import { UsersService } from '../users/users.service';
+import { AccountsService } from '../accounts/accounts.service';
 import { CreateBusinessDto } from './dto/create-business.dto';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { UpdateUserDto } from '../users/dto/update-user.dto';
 import { BusinessPipe } from './business.pipe';
 import { UserIdPipe } from '../users/user-id.pipe';
+import { AccountDatePipe } from '../accounts/account-date.pipe';
+import { AccountIntervalPipe } from '../accounts/account-interval.pipe';
 import { Roles } from '../roles/roles.decorator';
+import { User } from '../users/user.decorator';
 import { Role } from '../roles/role.enum';
 
 
 
 @Controller('businesses')
 export class BusinessesController {
-    constructor(private readonly BusinessesService: BusinessesService, private readonly UsersService: UsersService) {}
+    constructor(private readonly BusinessesService: BusinessesService, private readonly UsersService: UsersService , private readonly AccountsService: AccountsService) {}
 
     @Post()
     async create(@Body(BusinessPipe) businessData: CreateBusinessDto) {
@@ -92,4 +96,24 @@ export class BusinessesController {
 
         return usersData;
     }
+
+    @UseGuards(JwtAuthGuard, TokenBlacklistGuard, BusinessesGuard)
+    @Get(':businessId/accounts')
+    async getAccounts(
+      @Param('businessId') businessId :string, 
+      @User() user: any,
+      @Query('dateInterval',AccountIntervalPipe) dateInterval :string,
+      @Query('fromDate',AccountDatePipe) fromDate :string,
+      @Query('toDate',AccountDatePipe) toDate :string,
+    ) {
+
+      let accountsData;
+
+      if(dateInterval) return accountsData = await this.AccountsService.findAccountsMonthlyStatement(businessId,user.roles);
+      else if(fromDate && toDate) return accountsData = await this.AccountsService.findAccountsIntervalStatement(businessId,user.roles,fromDate,toDate);
+      else return accountsData = await this.AccountsService.findAccounts(businessId,user.roles);
+
+  }
+
+
 }

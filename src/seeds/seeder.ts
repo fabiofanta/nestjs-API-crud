@@ -9,7 +9,7 @@ const transactionSeedSchema = new mongoose.Schema({
     date: String,
     balance: Number,
     income: Number,
-    expences:Number
+    expenses:Number
 },{timestamps:true});
 const accountSeedSchema = new mongoose.Schema({
     name: String,

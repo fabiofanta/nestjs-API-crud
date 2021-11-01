@@ -13,7 +13,7 @@ import { TokenBlacklistService } from '../token-blacklist/token-blacklist.servic
 @Module({
   imports: [UsersModule, PassportModule, JwtModule.register({
     secret: constants.secret,
-    signOptions: { expiresIn: '60s' },
+    signOptions: { expiresIn: '30m' },
   }),],
   providers: [AuthService, LocalStrategy, JwtStrategy, TokenBlacklistService],
   exports: [AuthService,TokenBlacklistService],

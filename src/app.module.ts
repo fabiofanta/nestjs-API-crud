@@ -8,11 +8,12 @@ import { BusinessesModule } from './businesses/businesses.module';
 import { APP_PIPE } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { constants } from './constants';
+import { AccountsModule } from './accounts/accounts.module';
 
 
 
 @Module({
-  imports: [MongooseModule.forRoot(constants.mongoURI),UsersModule, AuthModule, BusinessesModule],
+  imports: [MongooseModule.forRoot(constants.mongoURI),UsersModule, AuthModule, BusinessesModule, AccountsModule],
   controllers: [AppController],
   providers: [AppService,
     {

@@ -1,7 +1,7 @@
 import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { User} from './schemas/user.schema';
+import { User } from './schemas/user.schema';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from '../users/dto/update-user.dto';
 import { UserResponseDto } from './dto/user-response.dto';
@@ -38,7 +38,7 @@ export class UsersService {
 
     async findOne(email: string): Promise<User & {businessId?:string} | undefined> {
         
-        const businessDocumentByEmail = await this.businessModel.findOne({'users.email': email},{'users.email.$':1}).lean();
+        const businessDocumentByEmail = await this.businessModel.findOne({'users.email': email}).lean();
 
         const businessId = businessDocumentByEmail?._id;
         const foundUser: User & {businessId?:string} = businessDocumentByEmail?.users.pop();

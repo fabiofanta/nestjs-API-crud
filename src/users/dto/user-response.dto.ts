@@ -4,7 +4,7 @@ import { Document } from 'mongoose';
 
 
 
-class UserPayloadResponseDto {
+export class UserPayloadResponseDto {
     name:string;
     email:string;
     roles: Role[];
