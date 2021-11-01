@@ -38,7 +38,7 @@ save(seederAcme,seederTech);
 
 
 async function connect() {
-    await mongoose.connect(constants.mongoURI);
+    await mongoose.connect(constants.mongoURI, {keepAlive: true,connectTimeoutMS: 3000000});
 }
 async function stop() {
     await mongoose.disconnect() ;

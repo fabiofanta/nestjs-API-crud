@@ -5,7 +5,7 @@ export const acmeCorporation = {
           name: 'easypol',
           email: 'easypol@easypol.it',
           password: '$2b$10$DqhPPKStBrVVH1Ted56rQu8WiUiM5JPC9pYlzocNX6nYdxAUVR5J.',
-          roles: ['user']
+          roles: ['admin']
       }
   ],
   accounts : [
