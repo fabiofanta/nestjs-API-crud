@@ -43,5 +43,5 @@ $ npm run test:cov
 ## Info
 
 DockerFile also run a seeder that seeds MongoDB Database with mockup data (src/seed/seed.ts), in order to test the app.
-To log in to ACME Corporation from mockup data, as admin use these credentials : user:easypol@easypol.it pw:passeasy
-To log in to Technology ARC from mockup data, as admin use these credentials : user:easypoltech@easypol.it pw:passpol
+- To log in to ACME Corporation from mockup data, as admin use these credentials : user:easypol@easypol.it pw:passeasy
+- To log in to Technology ARC from mockup data, as admin use these credentials : user:easypoltech@easypol.it pw:passpol
