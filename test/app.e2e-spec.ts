@@ -21,4 +21,15 @@ describe('AppController (e2e)', () => {
       .expect(200)
       .expect('Hello World!');
   });
+
+  it('/auth/login (POST)', () => {
+    return request(app.getHttpServer())
+      .post('/auth/login')
+      .send({
+          username: "easypol@easypol.it",
+          password: "passeasy"
+      })
+      .expect('Content-Type', /json/)
+      .expect(201)
+  });
 });
